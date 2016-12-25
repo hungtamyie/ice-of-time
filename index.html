@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ice of Time</title>
+        <style>
+            body {
+                margin: 0px;
+                background: black;
+            }
+            #canvas {
+                background-image: url(images/ice.png);
+                background-size: cover;
+                display: block;
+                image-rendering: optimizeSpeed;            
+                image-rendering: -moz-crisp-edges;          
+                image-rendering: -webkit-optimize-contrast; 
+                image-rendering: -o-crisp-edges;            
+                image-rendering: optimize-contrast;   
+                -ms-interpolation-mode: nearest-neighbor;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                z-index: 0;
+                transform: translateX(-50%) translateY(-50%);
+            }
+            .levelText {
+                color: black;
+                font-weight: bold;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                z-index: 1;
+                transform: translateX(-50%) translateY(-50%);
+                width: 500px;
+                height: auto;
+                background: rgba(255,255,255,0.8);
+                text-align: center;
+                font-family: monospace;
+                font-size: 50px;
+            }
+            .menu {
+                visibility: visible;
+                color: black;
+                font-weight: bold;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                z-index: 4;
+                transform: translateX(-50%) translateY(-50%);
+                width: 500px;
+                height: auto;
+                background: #6494e0;
+                text-align: center;
+                font-family: monospace;
+                font-size: 50px;
+            }
+            .selectionTable {
+                float: center;
+                width: 90%;
+                height: 20%;
+                border-spacing: 2vh;
+                margin: 5%
+            }
+            .menuTitle {
+                background-color: lightgreen;
+                border-bottom: 2px solid black;
+                border-top: 2px solid black;
+                margin-bottom: 25px;
+            }
+            .title {
+                color: white;
+                background-color: salmon;
+                font-style: italic;
+            }
+            .navButton {
+                background-color: green;
+                display: inline-block;
+                width: 15%;
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Chrome/Safari/Opera */
+                 -khtml-user-select: none; /* Konqueror */
+                   -moz-user-select: none; /* Firefox */
+                    -ms-user-select: none; /* Internet Explorer/Edge */
+                        user-select: none; /* Non-prefixed version, currently
+                                              not supported by any browser */
+            }
+            .navButton:active {
+                background-color: white;
+            }
+            .menuTitleText {
+                display: inline-block;
+                width: 50%;
+            }
+            .grey {
+                background: grey;
+            }
+            .selectionTable tr td {
+                color: black;
+                background: #efc77c;
+                border: 2px solid black;
+                padding: 2%;
+                padding-top: 6%;
+                padding-bottom: 6%;
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Chrome/Safari/Opera */
+                 -khtml-user-select: none; /* Konqueror */
+                   -moz-user-select: none; /* Firefox */
+                    -ms-user-select: none; /* Internet Explorer/Edge */
+                        user-select: none; /* Non-prefixed version, currently
+                                              not supported by any browser */
+                
+            }
+            .selectionTable tr td:active {
+                background-color: white;
+                color: white;
+            }
+            .settingsBar {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                background-color: lightgreen;
+                border-top: 2px solid black;
+            }
+            .soundButton {
+                background-color: #efc77c;
+                display: inline-block;
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Chrome/Safari/Opera */
+                 -khtml-user-select: none; /* Konqueror */
+                   -moz-user-select: none; /* Firefox */
+                    -ms-user-select: none; /* Internet Explorer/Edge */
+                        user-select: none; /* Non-prefixed version, currently
+                                              not supported by any browser */
+                        
+                margin: 10px;
+                border: 2px solid black;
+                border-radius: 5000px;
+                width: 18%
+            }
+            .soundButton:active {
+                background-color: white;
+            }
+            .backgroundMusic {
+                visibility: hidden;
+            }
+            .gameMenu {
+                color: black;
+                font-weight: bold;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                z-index: -1;
+                transform: translateX(-50%) translateY(-50%);
+                width: 100%;
+                height: auto;
+                background: #6494e0;
+                border-top: 2px solid black;
+                border-bottom: 2px solid black;
+                text-align: center;
+                font-family: monospace;
+                font-size: 50px;
+            }
+            .orangeButton {
+                background-color: orange;
+                display: inline-block;
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Chrome/Safari/Opera */
+                 -khtml-user-select: none; /* Konqueror */
+                   -moz-user-select: none; /* Firefox */
+                    -ms-user-select: none; /* Internet Explorer/Edge */
+                        user-select: none; /* Non-prefixed version, currently
+                                              not supported by any browser */
+                        
+                margin: 10px;
+                border: 2px solid black;
+                border-radius: 5000px;
+                width: 20%;
+                height: 80%;
+                margin-top: 2%;
+            }
+            .orangeButton:active {
+                background-color: #ce6e00;
+            }
+            .gameMenuImg {
+                position: relative;
+                top: 17%;
+                width: 65%;
+                height: 65%;
+            }
+        </style>
+        <script src="scripts/startup.js"></script>
+        <script src="scripts/globals.js"></script>
+        <script src="scripts/block.js"></script>
+        <script src="scripts/levelData.js"></script>
+        <script src="scripts/game.js"></script>
+        <script src="scripts/levelHandler.js"></script>
+    </head>
+    <body>
+        <!--Developed by: Hung-Tam Yie-->
+        <!--Special thanks to: Michael Yie-->
+        <center>
+            <div id="levelText" class="levelText" onclick="levelTextClicked()">Welcome. Use WASD or the arrow keys to move. Try to get to the green box.</div>
+            <div id="menu" class="menu">
+                <div class="title" id="title">The Ice Of Time</div>
+                <div class="menuTitle" id="menuTitle">
+                    <div class="navButton" id="navButtonBack"><</div>
+                    <div class="menuTitleText" id="menuTitleText">4x4 (Easy)</div>
+                    <div class="navButton" id="navButtonForward">></div>
+                </div>
+                <table class="selectionTable">
+                    <tr>
+                        <td id="table1">4-1</td>
+                        <td id="table2">4-2</td>
+                        <td id="table3">4-3</td>
+                    </tr>
+                    <tr>
+                        <td id="table4">4-4</td>
+                        <td id="table5">4-5</td>
+                        <td id="table6">4-6</td>
+                    </tr>
+                    <tr>
+                        <td id="table7">4-7</td>
+                        <td id="table8">4-8</td>
+                        <td id="table9">4-9</td>
+                    </tr>
+                </table>
+                <div class="settingsBar">
+                    <div id="musicB" class="soundButton">Music</div>
+                    <div id="soundB" class="soundButton">Sound</div>
+                    <div id="creditsB" class="soundButton">Credits</div>
+                    <div id="rulesB" class="soundButton">Rules</div>
+                </div>
+            </div>
+            <div id="gameMenu" class="gameMenu">
+                <div class="orangeButton" id="questionButton">
+                    <img class="gameMenuImg" src="images/ui/question.png">
+                </div>
+                <div class="orangeButton" id="menuButton">
+                    <img class="gameMenuImg" src="images/ui/menu.png">
+                </div>
+                <div class="orangeButton" id="nextButton">
+                    <img class="gameMenuImg" src="images/ui/next.png">
+                </div>
+            </div>
+            <canvas id="canvas" width="500px" height="500px">
+                Your browser does not support canvas. Please upgrade to be able to play this game.
+            </canvas>
+        </center>
+        
+        <audio autoplay="" loop="" preload="" class="backgroundmusic" id="player">
+        <source src="sounds/backgroundmusic.mp3" type="audio/mp3"></source>
+        Your browser does not support the audio element.
+       </audio>
+    </body>
+</html>
