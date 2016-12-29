@@ -55,7 +55,7 @@ Game.prototype.createLevel = function(past){
                     break;
                 case 3:
                     if (past) {
-                        this.player = new Player(y,x,8,this.player.lastX,this.player.lastY,this.player.movement)
+                        this.player = new Player(y,x,8,this.player.lastX,this.player.lastY,this.player.movement);
                         this.blocks.push(this.player);
                         this.timeBlock = (new ghostTime(y,x,-3))
                         this.blocks.push(this.timeBlock);
@@ -80,7 +80,7 @@ Game.prototype.createLevel = function(past){
                     break;
                 case 8:
                     if (past) {
-                        this.ghostPlayer = new ghostPlayer(y,x,9,this.playerHistory)
+                        this.ghostPlayer = new ghostPlayer(y,x,9,this.playerHistory);
                         this.blocks.push(this.ghostPlayer);
                         break;
                     }
@@ -139,8 +139,13 @@ var update = function(){
 
 Game.prototype.render = function(){
     ctx.clearRect(0,0,canvas.width,canvas.height)
+    if (this.trigger) {
+        this.trigger.render()
+    }
     for(i = 0 ; i < this.blocks.length ; i++){
-        this.blocks[i].render();
+        if (this.blocks[i].num != 5) {
+            this.blocks[i].render();
+        }
     }
     this.player.render()
     if (this.ghostPlayer) {

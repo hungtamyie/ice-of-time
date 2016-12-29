@@ -128,7 +128,12 @@ function Player(x, y, num, lastX, lastY, movement) {
             levelTextClicked()  
         }
         else if(!gameMenuShowing){
-            
+            if (hesbyMode && charCode === 78) {
+                if (sound) {
+                    winSound.play();
+                }
+                game.levelHandler.levelCompleted()
+            }
             if (Number(charCode) === 87) {
                 selfRef.move("up")
             }

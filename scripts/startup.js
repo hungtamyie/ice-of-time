@@ -85,6 +85,7 @@ function setUpStorage(){
     else {
         levelsBeat = 0
     }
+    levelType = Math.floor((levelsBeat-4)/9)
 }
 
 function updateStorage() {

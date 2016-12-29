@@ -227,6 +227,9 @@ function reset(){
 }
 
 function updateMenu(){
+    if (levelType > 2) {
+        levelType = 2
+    }
     document.getElementById("menuTitleText").innerHTML = levelData[levelType] + "x" + levelData[levelType] + levelDescriptions[levelType]
     for(i=1; i<10; i++){
         document.getElementById("table" + i).innerHTML = Number(9*levelType + i)
@@ -293,6 +296,11 @@ function levelButtonClicked(){
         document.getElementById("gameMenu").style.zIndex = -1
         game.render()
     }
+}
+
+function hesbyModeOn(){
+    hesbyMode = true
+    console.log("Hi Mr. Hesby, hope you enjoy the game! I know you don't have time to play it through so click N to skip levels.")
 }
 
 document.onkeypress = function(evt) {
