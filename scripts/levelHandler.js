@@ -179,7 +179,7 @@ function toggleSound(){
 }
 
 function showCredits(){
-    document.getElementById("levelText").innerHTML = "<h2>Credits</h2>=-=-=-=-=<br> Programmer/Artist: Hung-Tam Yie <br><br> Music: Underwater Theme by Doppelganger <br><br>=-=-=-=-=<br><br>Thanks to all beta testers! <br>Kenson Nguyen<br>Crysjreid<br>Nhat Minh<br>Michael Yie<br>Minh-Tam Yie<br>..."
+    document.getElementById("levelText").innerHTML = "<h2>Credits</h2>=-=-=-=-=<br> Programmer/Artist: Hung-Tam Yie <br><br> Music: Underwater Theme by Doppelganger <br><br>=-=-=-=-=<br><br>Thanks to all beta testers! <br>Kenson Nguyen<br>Crysjreid<br>Nhat Minh<br>Michael Yie<br>Minh-Tam Yie<br>Albert Nguyen<br>..."
     fadeIn("levelText",5)
     textClicked = true
 }
@@ -310,11 +310,5 @@ document.onkeypress = function(evt) {
     
     if (charStr === "r") {
         game.levelHandler.reset();
-    };
-    if (charStr === "]") {
-        game.levelHandler.next();
-    };
-    if (charStr === "[") {
-        game.levelHandler.back();
     };
 };

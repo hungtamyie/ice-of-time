@@ -35,6 +35,8 @@ Game.prototype.createLevel = function(past){
         this.player = undefined;
         this.ghostPlayer = undefined;
         this.timeBlock = undefined;
+        this.trigger = undefined;
+        this.door = undefined;
     }
     else {
         this.teleportation = teleportationTime
